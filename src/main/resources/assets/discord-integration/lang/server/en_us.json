@@ -1,0 +1,7 @@
+{
+  "not_linked.title": "You must link your Discord account to play!",
+  "not_linked.step1": "1. Join our Discord server",
+  "not_linked.step2": "2. Run this command in Discord: ",
+  "server_error": "Server error during verification.\nPlease try again later.",
+  "config_error": "Server configuration error.\nPlease contact an administrator."
+}

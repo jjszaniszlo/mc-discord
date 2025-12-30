@@ -1,0 +1,7 @@
+{
+  "not_linked.title": "¡Debes vincular tu cuenta de Discord para jugar!",
+  "not_linked.step1": "1. Únete a nuestro servidor de Discord",
+  "not_linked.step2": "2. Ejecuta este comando en Discord: ",
+  "server_error": "Error del servidor durante la verificación.\nPor favor, inténtalo más tarde.",
+  "config_error": "Error de configuración del servidor.\nPor favor, contacta a un administrador."
+}

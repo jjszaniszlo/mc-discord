@@ -1,0 +1,8 @@
+{
+  "link.success": "Successfully linked! Your Discord account is now linked to Minecraft account **%s**. You can now join the server!",
+  "link.already_linked": "Your Discord account is already linked to a Minecraft account!",
+  "link.invalid_code": "Invalid or expired verification code. Please get a new code by joining the Minecraft server.",
+  "link.not_in_guild": "You must be a member of this server to link your account!",
+  "link.database_error": "A database error occurred. Please try again later.",
+  "bot.config_error": "Bot configuration error. Please contact an administrator."
+}

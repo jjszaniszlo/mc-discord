@@ -1,0 +1,12 @@
+services:
+  db:
+    image: mysql
+    restart: always
+    container_name: mcdb 
+    environment:
+      MYSQL_ROOT_PASSWORD: EXAMPLE
+      MYSQL_DATABASE: mc_discord
+      MYSQL_USER: minecraft 
+      MYSQL_PASSWORD: EXAMPLE
+    ports:
+      - "3306:3306"

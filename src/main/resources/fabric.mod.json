@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "discord-integration",
+  "version": "${version}",
+  "name": "discord-integration",
+  "description": "Discord integration for minecraft",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/discord-integration/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.jjszaniszlo.discordIntegration.client.DiscordIntegrationDataGenerator"
+    ],
+    "main": [
+      "com.jjszaniszlo.discordIntegration.DiscordIntegration"
+    ]
+  },
+  "mixins": [
+    "discord-integration.mixins.json",
+    {
+      "config": "discord-integration.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

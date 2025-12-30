@@ -1,0 +1,8 @@
+{
+  "link.success": "¡Vinculación exitosa! Tu cuenta de Discord ahora está vinculada a la cuenta de Minecraft **%s**. ¡Ya puedes unirte al servidor!",
+  "link.already_linked": "¡Tu cuenta de Discord ya está vinculada a una cuenta de Minecraft!",
+  "link.invalid_code": "Código de verificación inválido o expirado. Por favor, obtén un nuevo código uniéndote al servidor de Minecraft.",
+  "link.not_in_guild": "¡Debes ser miembro de este servidor para vincular tu cuenta!",
+  "link.database_error": "Ocurrió un error en la base de datos. Por favor, inténtalo más tarde.",
+  "bot.config_error": "Error de configuración del bot. Por favor, contacta a un administrador."
+}
