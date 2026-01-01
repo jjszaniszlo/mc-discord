@@ -18,11 +18,7 @@
     ]
   },
   "mixins": [
-    "discord-integration.mixins.json",
-    {
-      "config": "discord-integration.client.mixins.json",
-      "environment": "client"
-    }
+    "discord-integration.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

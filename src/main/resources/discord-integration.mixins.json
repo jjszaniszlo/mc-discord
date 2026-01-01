@@ -4,6 +4,7 @@
   "package": "com.jjszaniszlo.discordIntegration.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ChatSuggestionsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

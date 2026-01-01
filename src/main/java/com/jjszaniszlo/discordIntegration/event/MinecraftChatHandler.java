@@ -110,6 +110,9 @@ public class MinecraftChatHandler {
         String username = member.getEffectiveName();
         String avatarUrl = member.getEffectiveAvatarUrl();
 
+        // Parse @username mentions and convert to Discord mention format
+        String processedContent = DiscordUtils.parseMentions(messageContent, member.getGuild());
+
         Thread.startVirtualThread(() -> {
             try {
                 HttpURLConnection connection = (HttpURLConnection) URI.create(webhookUrl).toURL().openConnection();
@@ -118,10 +121,10 @@ public class MinecraftChatHandler {
                 connection.setDoOutput(true);
 
                 String json = String.format(
-                    "{\"username\":\"%s\",\"avatar_url\":\"%s\",\"content\":\"%s\"}",
+                    "{\"username\":\"%s\",\"avatar_url\":\"%s\",\"content\":\"%s\",\"allowed_mentions\":{\"parse\":[\"users\"]}}",
                     escapeJson(username),
                     avatarUrl,
-                    escapeJson(messageContent)
+                    escapeJson(processedContent)
                 );
 
                 try (OutputStream os = connection.getOutputStream()) {

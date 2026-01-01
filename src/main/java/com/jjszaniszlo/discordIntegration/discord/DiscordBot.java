@@ -8,6 +8,8 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.minecraft.server.MinecraftServer;
 
 import java.util.function.Supplier;
@@ -41,9 +43,12 @@ public class DiscordBot {
 
                 jda = JDABuilder.createDefault(config.botToken)
                     .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
+                    .setMemberCachePolicy(MemberCachePolicy.ALL)
+                    .setChunkingFilter(ChunkingFilter.ALL)
                     .addEventListeners(
                         new LinkCommand(databaseManager, config.requiredGuildId),
-                        new ChatRelayListener(config.chatChannelId, serverSupplier)
+                        new ChatRelayListener(config.chatChannelId, serverSupplier),
+                        new MemberUpdateListener(config.requiredGuildId, serverSupplier)
                     )
                     .build();
 
