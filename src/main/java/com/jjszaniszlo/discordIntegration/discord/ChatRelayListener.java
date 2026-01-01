@@ -1,6 +1,5 @@
 package com.jjszaniszlo.discordIntegration.discord;
 
-import com.jjszaniszlo.discordIntegration.DiscordIntegration;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -20,7 +19,6 @@ public class ChatRelayListener extends ListenerAdapter {
     public ChatRelayListener(String chatChannelId, Supplier<MinecraftServer> serverSupplier) {
         this.chatChannelId = chatChannelId;
         this.serverSupplier = serverSupplier;
-        DiscordIntegration.LOGGER.info("ChatRelayListener initialized for channel: {}", chatChannelId);
     }
 
     @Override
@@ -50,7 +48,7 @@ public class ChatRelayListener extends ListenerAdapter {
             return;
         }
 
-        Role displayedRole = getDisplayedRole(member);
+        Role displayedRole = DiscordUtils.getDisplayedRole(member);
         String roleName = displayedRole != null ? displayedRole.getName() : "Member";
         Color roleColor = member.getColor() != null ? member.getColor() : Color.WHITE;
 
@@ -67,12 +65,4 @@ public class ChatRelayListener extends ListenerAdapter {
         });
     }
 
-    private Role getDisplayedRole(Member member) {
-        for (Role role : member.getRoles()) {
-            if (role.isHoisted() || role.getColor() != null) {
-                return role;
-            }
-        }
-        return member.getRoles().isEmpty() ? null : member.getRoles().get(0);
-    }
 }

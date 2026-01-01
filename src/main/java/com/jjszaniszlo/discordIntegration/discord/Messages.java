@@ -17,7 +17,6 @@ import java.util.Map;
 public class Messages {
     private static final Gson GSON = new Gson();
     private static Map<String, String> messages = new HashMap<>();
-    private static String currentLanguage = "en";
 
     public static final String LINK_SUCCESS = "link.success";
     public static final String LINK_ALREADY_LINKED = "link.already_linked";
@@ -27,8 +26,6 @@ public class Messages {
     public static final String BOT_CONFIG_ERROR = "bot.config_error";
 
     public static void load(String language) {
-        currentLanguage = language;
-
         Path configPath = FabricLoader.getInstance().getConfigDir()
             .resolve("discord-integration")
             .resolve("messages_" + language + ".json");
@@ -84,9 +81,5 @@ public class Messages {
         } catch (Exception e) {
             return message;
         }
-    }
-
-    public static String getCurrentLanguage() {
-        return currentLanguage;
     }
 }

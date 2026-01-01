@@ -19,16 +19,11 @@ public class LinkCommand extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        DiscordIntegration.LOGGER.info("Received slash command: {}", event.getName());
-
         if (!event.getName().equals("link")) {
             return;
         }
 
-        event.deferReply(true).queue(
-            success -> DiscordIntegration.LOGGER.info("Deferred reply sent"),
-            error -> DiscordIntegration.LOGGER.error("Failed to defer reply", error)
-        );
+        event.deferReply(true).queue();
 
         String code = event.getOption("code").getAsString().toUpperCase().trim();
         String discordId = event.getUser().getId();

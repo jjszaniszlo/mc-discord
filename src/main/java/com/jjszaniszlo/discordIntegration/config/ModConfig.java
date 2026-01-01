@@ -40,27 +40,20 @@ public class ModConfig {
 
     public static ModConfig getInstance() {
         if (instance == null) {
-            instance = load();
+            Path configPath = FabricLoader.getInstance().getConfigDir().resolve(CONFIG_FILE);
+            if (Files.exists(configPath)) {
+                try {
+                    String json = Files.readString(configPath);
+                    instance = GSON.fromJson(json, ModConfig.class);
+                } catch (IOException e) {
+                    throw new RuntimeException("Failed to load config file", e);
+                }
+            } else {
+                instance = new ModConfig();
+                instance.save();
+            }
         }
         return instance;
-    }
-
-    public static ModConfig load() {
-        Path configPath = FabricLoader.getInstance().getConfigDir().resolve(CONFIG_FILE);
-
-        if (Files.exists(configPath)) {
-            try {
-                String json = Files.readString(configPath);
-                instance = GSON.fromJson(json, ModConfig.class);
-                return instance;
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to load config file", e);
-            }
-        } else {
-            instance = new ModConfig();
-            instance.save();
-            return instance;
-        }
     }
 
     public void save() {

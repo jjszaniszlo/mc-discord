@@ -91,10 +91,6 @@ public class DatabaseManager {
         return Optional.empty();
     }
 
-    public boolean isPlayerLinked(UUID minecraftUuid) throws SQLException {
-        return getLinkedDiscordId(minecraftUuid).isPresent();
-    }
-
     public String createPendingVerification(UUID minecraftUuid, String username) throws SQLException {
         ensureConnection();
         int expirationMinutes = ModConfig.getInstance().getCodeExpirationMinutes();

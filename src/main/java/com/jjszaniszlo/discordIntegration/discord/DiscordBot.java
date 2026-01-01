@@ -29,10 +29,6 @@ public class DiscordBot {
         return config.requiredGuildId;
     }
 
-    public String getChatChannelId() {
-        return config.chatChannelId;
-    }
-
     public static void initialize(ModConfig.DiscordConfig config, DatabaseManager databaseManager, Supplier<MinecraftServer> serverSupplier) {
         instance = new DiscordBot(config);
         instance.start(databaseManager, serverSupplier);
@@ -52,11 +48,8 @@ public class DiscordBot {
                     .build();
 
                 jda.awaitReady();
-                DiscordIntegration.LOGGER.info("Discord bot connected as {}", jda.getSelfUser().getName());
-                DiscordIntegration.LOGGER.info("Bot is in {} guilds:", jda.getGuilds().size());
-                for (var g : jda.getGuilds()) {
-                    DiscordIntegration.LOGGER.info("  - {} (ID: {})", g.getName(), g.getId());
-                }
+                DiscordIntegration.LOGGER.info("Discord bot connected as {} in {} guild(s)",
+                    jda.getSelfUser().getName(), jda.getGuilds().size());
 
                 var guild = jda.getGuildById(config.requiredGuildId);
                 if (guild != null) {

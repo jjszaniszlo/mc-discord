@@ -29,30 +29,18 @@ public class DiscordIntegration implements ModInitializer {
 
         Messages.load(config.getLanguage());
 
-        boolean databaseReady = false;
         try {
             DatabaseManager.initialize(config.getMysql());
             LOGGER.info("Database connection established");
-            databaseReady = true;
-        } catch (Exception e) {
-            LOGGER.error("Failed to initialize database: {}", e.getMessage());
-        }
-
-        if (databaseReady && !config.getDiscord().botToken.equals("YOUR_BOT_TOKEN_HERE")) {
             DiscordBot.initialize(config.getDiscord(), DatabaseManager.getInstance(), serverRef::get);
-        } else if (!databaseReady) {
-            LOGGER.warn("Discord bot not started - database required");
-        } else {
-            LOGGER.warn("Discord bot token not configured");
+        } catch (Exception e) {
+            LOGGER.error("Failed to initialize: {}", e.getMessage());
         }
 
         PlayerJoinHandler.register();
         MinecraftChatHandler.register();
 
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            serverRef.set(server);
-            LOGGER.info("Server reference captured for chat relay");
-        });
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> serverRef.set(server));
 
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
             serverRef.set(null);
@@ -65,9 +53,5 @@ public class DiscordIntegration implements ModInitializer {
         });
 
         LOGGER.info("Discord Integration initialized");
-    }
-
-    public static MinecraftServer getServer() {
-        return serverRef.get();
     }
 }

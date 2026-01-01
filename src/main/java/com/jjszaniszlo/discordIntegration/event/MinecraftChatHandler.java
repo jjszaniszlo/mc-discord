@@ -4,6 +4,7 @@ import com.jjszaniszlo.discordIntegration.DiscordIntegration;
 import com.jjszaniszlo.discordIntegration.config.ModConfig;
 import com.jjszaniszlo.discordIntegration.database.DatabaseManager;
 import com.jjszaniszlo.discordIntegration.discord.DiscordBot;
+import com.jjszaniszlo.discordIntegration.discord.DiscordUtils;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
@@ -83,7 +84,7 @@ public class MinecraftChatHandler {
 
     private static void broadcastToMinecraft(ServerPlayerEntity sender, Member member, String messageContent) {
         String displayName = member.getEffectiveName();
-        Role displayedRole = getDisplayedRole(member);
+        Role displayedRole = DiscordUtils.getDisplayedRole(member);
         String roleName = displayedRole != null ? displayedRole.getName() : "Member";
         Color roleColor = member.getColor() != null ? member.getColor() : Color.WHITE;
 
@@ -147,12 +148,4 @@ public class MinecraftChatHandler {
                    .replace("\t", "\\t");
     }
 
-    private static Role getDisplayedRole(Member member) {
-        for (Role role : member.getRoles()) {
-            if (role.isHoisted() || role.getColor() != null) {
-                return role;
-            }
-        }
-        return member.getRoles().isEmpty() ? null : member.getRoles().get(0);
-    }
 }
